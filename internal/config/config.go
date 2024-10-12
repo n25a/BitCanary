@@ -1,13 +1,14 @@
 package config
 
 import (
+	"time"
+
 	"github.com/knadh/koanf"
 	"github.com/knadh/koanf/parsers/yaml"
 	"github.com/knadh/koanf/providers/file"
 	"github.com/knadh/koanf/providers/structs"
 	"github.com/n25a/BitCanary/internal/log"
 	"go.uber.org/zap"
-	"time"
 )
 
 // C is global config of BitCanary
@@ -42,7 +43,7 @@ type Bucket struct {
 
 // LoadConfig function will load the file located in path and return the parsed config.
 // This function will panic on errors.
-func LoadConfig(path string) *Config {
+func LoadConfig(path string) {
 	// k is the global koanf instance. Use "." as the key path delimiter.
 	k := koanf.New(".")
 
@@ -65,5 +66,4 @@ func LoadConfig(path string) *Config {
 	}
 
 	C = &c
-	return &c
 }
