@@ -7,18 +7,26 @@ import (
 	"github.com/knadh/koanf/providers/structs"
 	"github.com/n25a/BitCanary/internal/log"
 	"go.uber.org/zap"
+	"time"
 )
 
 // C is global config of BitCanary
 var C *Config
 
 type Config struct {
-	PrimaryAddress   string   `koanf:"primary_address"`
-	SecondaryAddress string   `koanf:"secondary_address"`
-	SharedURLs       []string `koanf:"shared_urls"`
-	Canary           Canary   `koanf:"canary"`
-	UserIDHeaderKey  string   `koanf:"user_id_header_key"`
-	UserNestedKey    string   `koanf:"user_nested_key"`
+	HTTP            HTTP     `koanf:"http"`
+	PrimaryAddress  string   `koanf:"primary_address"`
+	CanaryAddress   string   `koanf:"canary_address"`
+	SharedURLs      []string `koanf:"shared_urls"`
+	Canary          Canary   `koanf:"canary"`
+	UserIDHeaderKey string   `koanf:"user_id_header_key"`
+	UserNestedKey   string   `koanf:"user_nested_key"`
+}
+
+type HTTP struct {
+	Bind         string        `koanf:"bind"`
+	ReadTimeout  time.Duration `koanf:"read_timeout"`
+	WriteTimeout time.Duration `koanf:"write_timeout"`
 }
 
 type Canary struct {
