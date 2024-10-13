@@ -3,6 +3,7 @@ package bitcanary
 import (
 	"context"
 	"flag"
+	"github.com/n25a/BitCanary/internal/server"
 	"net/http"
 	"os"
 	"os/signal"
@@ -39,7 +40,7 @@ func main() {
 
 	// start the server
 	mux := http.NewServeMux()
-	mux.HandleFunc("/", s.handle)
+	mux.HandleFunc("/", server.CanaryTestingHandler)
 
 	// TODO: add metrics handler
 
